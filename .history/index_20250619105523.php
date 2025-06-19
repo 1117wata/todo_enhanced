@@ -7,7 +7,6 @@
 </head>
 <body>
     <h1>Todoリスト</h1>
-    <p>ログイン者名<a href="logout.php">ログアウト</a></p>
     <article> <!-- タスク追加 -->
         <h2>タスク追加</h2>
             <input type="text" name="task" placeholder="タスク内容">
@@ -18,7 +17,7 @@
                 <option value="high">高</option>
             </select>
             <input type="submit" name="add" value="追加">
-     </article>
+     </article>fff
      <article>
         <h2>フィルタ / 検索</h2> <!-- フィルタ/検索 -->
             <input type="text" name="task" placeholder="キーワード">
