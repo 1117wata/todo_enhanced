@@ -7,7 +7,6 @@
 </head>
 <body>
     <h1>Todoリスト</h1>
-    <p>ログイン者名<a href="logout.php">ログアウト</a></p>
     <article> <!-- タスク追加 -->
         <h2>タスク追加</h2>
             <input type="text" name="task" placeholder="タスク内容">
