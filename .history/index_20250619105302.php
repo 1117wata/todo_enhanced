@@ -7,12 +7,11 @@
 </head>
 <body>
     <h1>Todoリスト</h1>
-    <p>ログイン者名<a href="logout.php">ログアウト</a></p>
     <article> <!-- タスク追加 -->
         <h2>タスク追加</h2>
             <input type="text" name="task" placeholder="タスク内容">
             <input type="datetime-local" name="duedate">
-            <select name="priority">
+            <select name="priority" size="1">
                 <option value="low">優先度（低）</option>
                 <option value="medium">中</option>
                 <option value="high">高</option>
