@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$pdo = new PDO('mysql:host=localhost;dbname=todo_db;chareset=utf8','root','');
+$pdo = new PDO('mysql:host=localhost;dbname=todo_db;charset=utf8','root','');
 $sql = $pdo->prepare('SELECT * FROM users WHERE username = ?');
 $sql->execute([$_POST['username']]);
 $result = $sql->fetch(PDO::FETCH_ASSOC);
@@ -31,13 +31,13 @@ if($result && $_POST['pass'] === $result['password']){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ログイン</title>
 </head>
 <body>
     <form action="" method="post">
     <h1>ログイン</h1>
         ユーザー名:
-        <input type="text" name="name" required><br>
+        <input type="text" name="username" required><br>
         パスワード:
         <input type="password" name="pass" required><br>
         <input type="submit" value="ログイン"><br><br>
