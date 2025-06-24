@@ -2,28 +2,28 @@
 session_start();
 
 $pdo = new PDO('mysql:host=localhost;dbname=todo_db;charset=utf8','root','');
-$sql = $pdo->prepare('SELECT * FROM users WHERE username = ?');
-$sql->execute([$_POST['username']]);
-$result = $sql->fetch(PDO::FETCH_ASSOC);
+if (isset($_POST['username']) && isset($_POST['pass'])) {
+    $sql = $pdo->prepare('SELECT * FROM users WHERE username = ?');
+    $sql->execute([$_POST['username']]);
+    $result = $sql->fetch(PDO::FETCH_ASSOC);
 
-if($result && $_POST['pass'] === $result['password']){
-    $update_sql = $pdo->prepare('UPDATE users SET created_at = NOW() WHERE id = ?');
-    $update_sql->execute([$result['id']]);//ログイン時間更新
+    if ($result && $_POST['pass'] === $result['password']) {
+        $update_sql = $pdo->prepare('UPDATE users SET created_at = NOW() WHERE id = ?');
+        $update_sql->execute([$result['id']]);
 
-    $_SESSION['users'] = [
-        'id' => $result['id'],
-        'name' => $result['username'],
-        'created_at' => date('y-m-d H:i:s')
-    ];
-    //ユーザー名をセッション
-    $_SESSION['username'] = $result['username'];
-    $_SESSION['user_id'] = $result['id'];
+        $_SESSION['users'] = [
+            'id' => $result['id'],
+            'name' => $result['username'],
+            'created_at' => date('y-m-d H:i:s')
+        ];
+        $_SESSION['username'] = $result['username'];
+        $_SESSION['user_id'] = $result['id'];
 
-    header("Location: index.php");
-    exit();
-} else {
-    echo "ログイン認証に失敗しました。<br>UsernameまたはPasswordが違います。";
-
+        header("Location: index.php");
+        exit();
+    } else {
+        echo "ログイン認証に失敗しました。<br>UsernameまたはPasswordが違います。";
+    }
 }
 ?>
 <!DOCTYPE html>
