@@ -1,0 +1,89 @@
+body {
+  background-color: rgb(232, 232, 232);
+  font-family: sans-serif;
+  padding: 20px;
+}
+
+.login {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px 30px 0 0;
+}
+
+.index {
+  background-color: #fff;
+  width: 500px;
+  height: 120px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.task-box {
+  background-color: white;
+  border-radius: 10px;
+  padding: 16px;
+  width: 100%;  /* 必要に応じて固定幅に */
+  max-width: 700px;  /* お好みで */
+  box-sizing: border-box;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* 軽い影で浮かせる */
+}
+
+.task-header {
+  display: flex;
+  gap: 16px;
+  font-weight: bold;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ccc;  /* ヘッダーの下の線は太めに */
+}
+
+.task-header > div {
+  flex-shrink: 0;
+  text-align: center;
+}
+
+/* 列幅指定 */
+.task-header > div:nth-child(1),
+.task-item > div:nth-child(1) {
+  width: 60px;
+  text-align: left;
+  padding-left: 8px;
+}
+
+.task-header > div:nth-child(2),
+.task-item > div:nth-child(2) {
+  width: 200px;
+}
+
+.task-header > div:nth-child(3),
+.task-item > div:nth-child(3) {
+  width: 120px;
+}
+
+.task-header > div:nth-child(4),
+.task-item > div:nth-child(4) {
+  width: 100px;
+}
+
+.task-header > div:nth-child(5),
+.task-item > div:nth-child(5) {
+  width: 150px;
+}
+
+.task-item {
+  display: flex;
+  gap: 16px;
+  padding: 12px 0;
+  align-items: center;
+  border-bottom: 1px solid #ccc; /* データの区切り線（灰色） */
+}
+
+.task-item:last-child {
+  border-bottom: none; /* 最後の行は線なし */
+}
+
+.task-item a {
+  text-decoration: none;
+  color: blue;
+}
