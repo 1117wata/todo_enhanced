@@ -1,19 +1,29 @@
+<?php
+session_start();
+$pdo = new PDO('mysql:host=localhost;dbname=todo_db;charset=utf8', 'root', '');
+$user_id = $_SESSION['user_id'] ?? 1; // テスト用に仮ユーザーIDも設定
+
+// タスク一覧を取得
+$sql = "SELECT * FROM todos WHERE user_id = $user_id ORDER BY due_date ASC";
+$tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<!-- HTML部分 -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todoリスト</title>
+  <meta charset="UTF-8">
+  <title>タスク管理</title>
 </head>
 <body>
-    <h1>Todoリスト</h1>
+  <h1>Todoリスト</h1>
     <p>ログイン者名 <a href="logout.php">ログアウト</a></p>
     <!-- タスク追加 -->
     <form action="./task_add.php" method="post">
         <article> 
             <h2>タスク追加</h2>
                 <input type="text" name="task" placeholder="タスク内容">
-                <input type="date" name="duedata">
+                <input type="date" name="duedate">
                 <select name="priority">
                     <option value="low">優先度（低）</option>
                     <option value="medium">中</option>
@@ -37,29 +47,26 @@
             </select>
             <input type="submit" name="search" value="適用">
      </article>
-     <?php 
-        //データベース接続情報
 
-        try {
-            //データベース接続
-            $pdo = new PDO("mysql:host=localhost;dbname=todo_db;charset=utf8",'root','');
+<div class="task-list">
+  <?php foreach ($tasks as $task): ?>
+    <div class="task-item">
+      <p>状態: <input type="checkbox" <?= htmlspecialchars($task['status']) ?>></p>
+      <p>タスク：<?= htmlspecialchars($task['task']) ?></p>
+      <p>期限：<?= htmlspecialchars($task['due_date']) ?></p>
+      <p>優先度：<?= htmlspecialchars($task['priority']) ?></p>
+      <p>
+        操作:
+        <a href="task_edit.php?id=<?= $task['id'] ?>">編集</a> /
+        <a href="task_delete.php?id=<?= $task['id'] ?>" onclick="return confirm('削除しますか？');">削除</a>
+      </p>
+    </div>
+  <?php endforeach; ?>
+</div>
 
-             //SQL文
-             $sql = "SELECT * FROM todos";
-             $stmt = $pdo->query($sql);
 
-             //データ表示
-             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo '状態: <input type="checkbox" name="check"><br>';
-                echo 'タスク: ' . htmlspecialchars($row['task']) . '<br>';
-                echo '期限: ' . htmlspecialchars($row['due_date']) . '<br>';
-                echo '優先度: ' . htmlspecialchars($row['priority']) . '<br>';
-                echo '操作: <a href="./task_edit.php?id=' . $row['id'] . '">編集</a> ';
-                echo '<a href="./task_delete.php?id=' . $row['id'] . '">削除</a><br><hr>';
-            }
-        } catch (PDOException $e) {
-            echo '接続エラー: ' . $e->getMessage();
-        }
-    ?>
+
+</div>
+
 </body>
 </html>
