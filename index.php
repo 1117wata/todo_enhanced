@@ -2,31 +2,32 @@
 session_start();
 $pdo = new PDO('mysql:host=localhost;dbname=todo_db;charset=utf8', 'root', '');
 $user_id = $_SESSION['user_id'] ?? 1;
-
+ 
 // 優先度変換
 function priorityLabel($val) {
   return [0 => '低', 1 => '中', 2 => '高'][$val] ?? '？';
 }
-
+ 
 // フィルタ条件構築
 $where = "user_id = :user_id";
 $params = [':user_id' => $user_id];
-
+ 
 if (!empty($_GET['task'])) {
   $where .= " AND task LIKE :task";
   $params[':task'] = '%' . $_GET['task'] . '%';
 }
-
+ 
 if (!empty($_GET['status']) && $_GET['status'] !== 'all') {
   $where .= " AND status = :status";
-  $params[':status'] = $_GET['status']; // "todo" or "done"
+  $params[':status'] = ($_GET['status'] === 'todo') ? 'todo' : 'done';
 }
-
+ 
+ 
 if (isset($_GET['priority']) && $_GET['priority'] !== 'all') {
   $where .= " AND priority = :priority";
   $params[':priority'] = (int)$_GET['priority'];
 }
-
+ 
 // 検索実行
 $sql = "SELECT * FROM todos WHERE $where ORDER BY due_date ASC";
 $stmt = $pdo->prepare($sql);
@@ -42,7 +43,7 @@ $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
   <h1>Todoリスト</h1>
-
+ 
   <div class="login">
     <?php if (isset($_SESSION['username'])): ?>
       <p><?= htmlspecialchars($_SESSION['username']) ?>さん <a href="logout.php">ログアウト</a></p>
@@ -50,7 +51,7 @@ $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <p>ログインしていません。<a href="login.php">ログイン</a></p>
     <?php endif; ?>
   </div>
-
+ 
   <!-- タスク追加 -->
   <form action="task_add.php" method="post">
     <div class="index">
@@ -65,30 +66,30 @@ $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <input type="submit" name="add" value="追加">
     </div>
   </form>
-
+ 
   <!-- フィルタ検索 -->
   <form method="get" action="index.php">
     <div class="index">
       <h2>フィルタ / 検索</h2>
       <input type="text" name="task" placeholder="キーワード" value="<?= htmlspecialchars($_GET['task'] ?? '') ?>">
-
+ 
       <select name="status">
         <option value="all">すべて</option>
         <option value="todo" <?= ($_GET['status'] ?? '') === 'todo' ? 'selected' : '' ?>>未完了</option>
         <option value="done" <?= ($_GET['status'] ?? '') === 'done' ? 'selected' : '' ?>>完了</option>
       </select>
-
+ 
       <select name="priority">
         <option value="all">優先度（すべて）</option>
         <option value="0" <?= ($_GET['priority'] ?? '') === '0' ? 'selected' : '' ?>>低</option>
         <option value="1" <?= ($_GET['priority'] ?? '') === '1' ? 'selected' : '' ?>>中</option>
         <option value="2" <?= ($_GET['priority'] ?? '') === '2' ? 'selected' : '' ?>>高</option>
       </select>
-
+ 
       <input type="submit" value="適用">
     </div>
   </form>
-
+ 
   <!-- タスク一覧 -->
   <div class="task-box">
     <div class="task-header">
@@ -98,7 +99,7 @@ $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <div>優先度</div>
       <div>操作</div>
     </div>
-
+ 
     <div class="task-list">
       <?php foreach ($tasks as $task): ?>
         <div class="task-item">
@@ -122,3 +123,4 @@ $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
   </div>
 </body>
 </html>
+ 

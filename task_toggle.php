@@ -8,7 +8,6 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $id = $_POST['id'] ?? null;
  
-// チェックされてれば完了、なければ未完了
 $status = isset($_POST['status']) ? 'done' : 'todo';
  
 if ($id) {
