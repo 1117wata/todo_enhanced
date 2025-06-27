@@ -19,8 +19,9 @@ if (!empty($_GET['task'])) {
 
 if (!empty($_GET['status']) && $_GET['status'] !== 'all') {
   $where .= " AND status = :status";
-  $params[':status'] = $_GET['status']; // "todo" or "done"
+  $params[':status'] = ($_GET['status'] === 'todo') ? 'todo' : 'done';
 }
+
 
 if (isset($_GET['priority']) && $_GET['priority'] !== 'all') {
   $where .= " AND priority = :priority";
