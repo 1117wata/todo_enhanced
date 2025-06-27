@@ -7,11 +7,6 @@ if (!isset($_SESSION['user_id'])) {
 }
 $user_id = $_SESSION['user_id'];
 $id = $_POST['id'] ?? null;
-<<<<<<< HEAD
- 
-=======
-
->>>>>>> bbc9629baeb2188e20f865f7c3ec7f21235dac87
 $status = isset($_POST['status']) ? 'done' : 'todo';
 
 if ($id) {

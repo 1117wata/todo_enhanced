@@ -21,13 +21,8 @@ if (!empty($_GET['status']) && $_GET['status'] !== 'all') {
   $where .= " AND status = :status";
   $params[':status'] = ($_GET['status'] === 'todo') ? 'todo' : 'done';
 }
-<<<<<<< HEAD
- 
- 
-=======
 
 
->>>>>>> bbc9629baeb2188e20f865f7c3ec7f21235dac87
 if (isset($_GET['priority']) && $_GET['priority'] !== 'all') {
   $where .= " AND priority = :priority";
   $params[':priority'] = (int)$_GET['priority'];
