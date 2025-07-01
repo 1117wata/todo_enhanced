@@ -38,11 +38,6 @@ body {
   border-bottom: 2px solid #ccc;  /* ヘッダーの下の線は太めに */
 }
 
-.task-header > div {
-  flex-shrink: 0;
-  text-align: center;
-}
-
 /* 列幅指定 */
 .task-header > div:nth-child(1),
 .task-item > div:nth-child(1) {
