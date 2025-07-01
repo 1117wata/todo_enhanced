@@ -3,14 +3,14 @@ body {
   font-family: sans-serif;
   padding: 20px;
 }
-
+ 
 .login {
   position: absolute;
   top: 0;
   right: 0;
   margin: 10px 30px 0 0;
 }
-
+ 
 .index {
   background-color: #fff;
   width: 500px;
@@ -19,7 +19,7 @@ body {
   margin-bottom: 20px;
   border-radius: 10px;
 }
-
+ 
 .task-box {
   background-color: white;
   border-radius: 10px;
@@ -29,7 +29,7 @@ body {
   box-sizing: border-box;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* 軽い影で浮かせる */
 }
-
+ 
 .task-header {
   display: flex;
   gap: 16px;
@@ -37,7 +37,6 @@ body {
   padding-bottom: 10px;
   border-bottom: 2px solid #ccc;  /* ヘッダーの下の線は太めに */
 }
-
 /* 列幅指定 */
 .task-header > div:nth-child(1),
 .task-item > div:nth-child(1) {
@@ -45,27 +44,27 @@ body {
   text-align: left;
   padding-left: 8px;
 }
-
+ 
 .task-header > div:nth-child(2),
 .task-item > div:nth-child(2) {
   width: 200px;
 }
-
+ 
 .task-header > div:nth-child(3),
 .task-item > div:nth-child(3) {
   width: 120px;
 }
-
+ 
 .task-header > div:nth-child(4),
 .task-item > div:nth-child(4) {
   width: 100px;
 }
-
+ 
 .task-header > div:nth-child(5),
 .task-item > div:nth-child(5) {
   width: 150px;
 }
-
+ 
 .task-item {
   display: flex;
   gap: 16px;
@@ -73,12 +72,46 @@ body {
   align-items: center;
   border-bottom: 1px solid #ccc; /* データの区切り線（灰色） */
 }
-
+ 
 .task-item:last-child {
   border-bottom: none; /* 最後の行は線なし */
 }
-
+ 
 .task-item a {
   text-decoration: none;
   color: blue;
+}
+ 
+.progress-container {
+  margin: 20px 0;
+}
+ 
+.progress-bar {
+  background-color: #eee;
+  border-radius: 10px;
+  height: 20px;
+  width: 100%;
+  overflow: hidden;
+}
+ 
+.progress-fill {
+  background-color: #4caf50;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+ 
+ 
+.overall-progress-bar {
+  background-color: #ddd;
+  border-radius: 10px;
+  width: 100%;
+  height: 20px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+ 
+.overall-progress-fill {
+  background-color: #4caf50;
+  height: 100%;
+  transition: width 0.4s ease;
 }

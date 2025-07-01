@@ -21,8 +21,8 @@ if (!empty($_GET['status']) && $_GET['status'] !== 'all') {
   $where .= " AND status = :status";
   $params[':status'] = ($_GET['status'] === 'todo') ? 'todo' : 'done';
 }
-
-
+ 
+ 
 if (isset($_GET['priority']) && $_GET['priority'] !== 'all') {
   $where .= " AND priority = :priority";
   $params[':priority'] = (int)$_GET['priority'];
@@ -51,6 +51,16 @@ $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
       <p>ログインしていません。<a href="login.php">ログイン</a></p>
     <?php endif; ?>
   </div>
+ 
+<?php $total = count($tasks);
+$doneCount = count(array_filter($tasks, fn($t) => $t['status'] === 'done'));
+$progress = $total > 0 ? round($doneCount / $total * 100) : 0;?>
+<div class="progress-container">
+  <p>進捗率: <?= $progress ?>%</p>
+  <div class="progress-bar">
+    <div class="progress-fill" style="width: <?= $progress ?>%;"></div>
+  </div>
+</div>
  
   <!-- タスク追加 -->
   <form action="task_add.php" method="post">
@@ -123,4 +133,3 @@ $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
   </div>
 </body>
 </html>
- 
