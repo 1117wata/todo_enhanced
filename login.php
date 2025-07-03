@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$pdo = new PDO('mysql:host=localhost;dbname=todo_db;charset=utf8','root','');
+$pdo = new PDO('mysql:host=mysql304.phy.lolipop.lan;dbname=LAA1602730-php2024;charset=utf8', 'LAA1602730', 'Watabeno1417');
 if (isset($_POST['username']) && isset($_POST['pass'])) {
     $sql = $pdo->prepare('SELECT * FROM users WHERE username = ?');
     $sql->execute([$_POST['username']]);

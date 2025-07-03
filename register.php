@@ -20,11 +20,9 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
     $password = $_POST['password'];
 
     try {
-        $pdo = new PDO('mysql:host=localhost;dbname=todo_db;charset=utf8', 'root', '');
+        $pdo = new PDO('mysql:host=mysql304.phy.lolipop.lan;dbname=LAA1602730-php2024;charset=utf8', 'LAA1602730', 'Watabeno1417');
         $sql = $pdo->prepare('INSERT INTO users (username, password) VALUES (?, ?)');
         $sql->execute([$username, $password]);
-         header('Location: login.php');
-        exit;
     } catch (PDOException $e) {
         echo 'DBエラー：' . $e->getMessage();
     }
