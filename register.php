@@ -8,8 +8,8 @@
     <h1>ユーザ登録</h1>
 
     <form action="" method="post">
-        ユーザー名: <input type="text" name="username"><br>
-        パスワード: <input type="password" name="password"><br>
+        ユーザー名: <input type="text" name="username" value="渡部泰輝"><br>
+        パスワード: <input type="password" name="password"value="12345"><br>
         <input type="submit" value="登録">
     </form>
 
